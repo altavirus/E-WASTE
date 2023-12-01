@@ -36,7 +36,7 @@ ActivityUserRqstBinding binding;
         setContentView(R.layout.activity_user_rqst);
         binding=ActivityUserRqstBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(uid).child("requests");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("requests");
         Intent intent = getIntent();
         if (intent != null) {
             userName = intent.getStringExtra("userName");

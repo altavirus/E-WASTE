@@ -20,8 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class loginActivity extends AppCompatActivity implements View.OnClickListener{
-ActivityLoginBinding binding;
+/*public class loginActivity extends AppCompatActivity implements View.OnClickListener{*/
+/*ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -110,5 +110,5 @@ ActivityLoginBinding binding;
     private void hideProgressBar() {
         binding.firebaseProgressBar.setVisibility(View.GONE);
         binding.loadingTextView.setVisibility(View.GONE);
-    }
-    }
+    }*/
+ /*   }*/

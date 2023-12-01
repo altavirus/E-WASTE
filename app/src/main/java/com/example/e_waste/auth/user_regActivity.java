@@ -27,7 +27,6 @@ import java.util.Objects;
 
 public class user_regActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "user_regActivity";
-    private static final String EXTRA_USER_NAME = "user_name";
 
     private ActivityUserRegBinding binding;
     private FirebaseAuth mAuth;

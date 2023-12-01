@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "80030531184",
+    "project_id": "e-waste-bb909",
+    "storage_bucket": "e-waste-bb909.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80030531184:android:f1cbdfab2ecc0e4c093eb5",
+        "android_client_info": {
+          "package_name": "com.example.e_waste"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOPRUTHvWozwzGvkr4Rr91uPSLyiGcdkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

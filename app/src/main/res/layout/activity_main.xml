@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <Button
+      android:id="@+id/driverButton"
+      android:layout_width="160dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:text="Driver"
+      app:layout_constraintBottom_toTopOf="@+id/adminBtn"
+      app:layout_constraintStart_toStartOf="@+id/adminBtn" />
+
+  <Button
+      android:id="@+id/adminBtn"
+      android:layout_width="160dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="40dp"
+      android:text="Admin"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+      android:id="@+id/userBtn"
+      android:layout_width="160dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:text="Get started"
+      app:layout_constraintBottom_toTopOf="@+id/driverButton"
+      app:layout_constraintStart_toStartOf="@+id/driverButton" />
+
+
+  <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="80dp"
+      android:text="E-WASTE"
+      android:textSize="36dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="The garbage collection app"
+      android:textSize="18dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

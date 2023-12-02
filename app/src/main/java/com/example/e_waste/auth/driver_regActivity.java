@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.e_waste.R;
 import com.example.e_waste.databinding.ActivityDriverRegBinding;
+import com.example.e_waste.driver_rqstsActivity;
 import com.example.e_waste.user_rqstActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -186,7 +187,7 @@ ActivityDriverRegBinding binding;
                 });
     }
     private void startNextActivity() {
-        Intent intent = new Intent(driver_regActivity.this, user_rqstActivity.class);
+        Intent intent = new Intent(driver_regActivity.this, driver_rqstsActivity.class);
 
         // Pass user information using extras
         intent.putExtra("driverName", binding.nameEditText.getText().toString());

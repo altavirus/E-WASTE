@@ -4,7 +4,7 @@ public class admin {
     private String name;
     private String email;
     private String password;
-    private String confirmPassword;
+    private String pin;
     private String phone;
 
     // Add a default constructor (required by some frameworks)
@@ -12,12 +12,12 @@ public class admin {
     }
 
     // Add a constructor with parameters for initialization
-    public admin(String name, String email, String password, String confirmPassword, String phone) {
+    public admin(String name, String email, String password, String phone, String pin) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.confirmPassword = confirmPassword;
         this.phone = phone;
+        this.pin = pin;
     }
 
     // Add getter and setter methods for each field
@@ -46,12 +46,12 @@ public class admin {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getPin() {
+        return pin;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 
     public String getPhone() {

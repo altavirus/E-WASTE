@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.e_waste.R;
+import com.example.e_waste.admin_rqstsActivity;
 import com.example.e_waste.databinding.ActivityAdminRegBinding;
 import com.example.e_waste.user_rqstActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -177,7 +178,7 @@ ActivityAdminRegBinding binding;
                 });
     }
     private void startNextActivity() {
-        Intent intent = new Intent(admin_regActivity.this, user_rqstActivity.class);
+        Intent intent = new Intent(admin_regActivity.this, admin_rqstsActivity.class);
 
         // Pass user information using extras
         intent.putExtra("adminName", binding.nameEditText.getText().toString());

@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +21,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/*public class loginActivity extends AppCompatActivity implements View.OnClickListener{*/
-/*ActivityLoginBinding binding;
+
+
+public class loginActivity extends AppCompatActivity{
+
+
+
+ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -31,84 +37,29 @@ import com.google.firebase.auth.FirebaseUser;
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    Intent intent = new Intent(loginActivity.this, user_rqstActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
+        String fragmentToLoad = getIntent().getStringExtra("fragmentToLoad");
+
+        if (fragmentToLoad != null) {
+            // Load the appropriate fragment based on the information
+            switch (fragmentToLoad) {
+                case "UserLoginFragment":
+                    loadFragment(new userLoginFragment());
+                    break;
+                case "DriverLoginFragment":
+                    loadFragment(new driverLoginFragment());
+                    break;
+                case "AdminLoginFragment":
+                    loadFragment(new adminLoginFragment());
+                    break;
+                // Add more cases for other fragments if needed
             }
-        };
-        binding.LoginButton.setOnClickListener(this);
-        binding.registerTextView.setOnClickListener(this);
-    }
-    @Override
-    public void onClick(View v) {
-        if (v==  binding.registerTextView) {
-            Intent intent = new Intent(loginActivity.this, user_regActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        if (v== binding.LoginButton) {
-            loginWithPassword();
-            showProgressBar();
         }
     }
 
-    private void loginWithPassword() {
-        String email = binding.emailEditText.getText().toString().trim();
-        String password =  binding.passwordEditText.getText().toString().trim();
-        if (email.equals("")) {
-            binding.emailEditText.setError("Please enter your email");
-            return;
-        }
-        if (password.equals("")) {
-            binding.passwordEditText.setError("Password cannot be blank");
-            return;
-        }
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        hideProgressBar();
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail", task.getException());
-                            Toast.makeText(loginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .commit();
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
+   }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    private void showProgressBar() {
-        binding.firebaseProgressBar.setVisibility(View.VISIBLE);
-        binding.loadingTextView.setVisibility(View.VISIBLE);
-        binding.loadingTextView.setText("You are logging in");
-    }
-
-    private void hideProgressBar() {
-        binding.firebaseProgressBar.setVisibility(View.GONE);
-        binding.loadingTextView.setVisibility(View.GONE);
-    }*/
- /*   }*/

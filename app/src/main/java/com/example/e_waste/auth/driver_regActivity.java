@@ -42,14 +42,15 @@ ActivityDriverRegBinding binding;
     @Override
     public void onClick(View view) {
         if (view == binding.loginTextView) {
-            navigateTologinActivity();
+            navigateTologinActivity("DriverLoginFragment");
         } else if (view == binding.buttonNext) {
             createNewUser();
         }
     }
 
-    private void navigateTologinActivity() {
+    private void navigateTologinActivity(String fragmentTag) {
         Intent intent = new Intent(driver_regActivity.this, loginActivity.class);
+        intent.putExtra("fragmentToLoad", fragmentTag);
         startActivity(intent);
         finish();
     }
@@ -77,7 +78,7 @@ ActivityDriverRegBinding binding;
         mAuthListener = firebaseAuth -> {
             final FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null) {
-                navigateTologinActivity();
+                navigateTologinActivity("DriverLoginFragment");
             }
         };
     }

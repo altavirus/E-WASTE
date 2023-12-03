@@ -1,69 +1,43 @@
 package com.example.e_waste.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class request {
-    private String name;
-    private String email;
-    private String password;
-    private String phone;
+    private String username;
     private String location;
-   // private List<String> dumpSites = new ArrayList<>();
+    private Status status;
+    private Date dateTime;
+    private String phoneNumber;
+    private String[] dumpsites;
 
-    // Add a default constructor
     public request() {
-        // Default constructor required for Firebase
     }
-
-    // Add a constructor with parameters for initialization
-    public request(String name, String email, String password, String phone, String location) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
+    // Constructor
+    public request(String username, String location, Status status, Date dateTime, String phoneNumber, String[] dumpsites) {
+        this.username = username;
         this.location = location;
+        this.status = status;
+        this.dateTime = dateTime;
+        this.phoneNumber = phoneNumber;
+        this.dumpsites = dumpsites;
     }
 
-    // Add getter and setter methods for each field
+    // Getter and setter methods for other properties...
 
-    public String getName() {
-        return name;
+    // Enum for status
+    public enum Status {
+        DONE,
+        PENDING,
+        IN_PROGRESS
     }
 
-    public void setName(String name) {
-        this.name = name;
+    // Getter and setter for status
+    public Status getStatus() {
+        return status;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
+

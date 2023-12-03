@@ -14,18 +14,24 @@ import android.widget.Toast;
 import com.example.e_waste.R;
 import com.example.e_waste.admin_rqstsActivity;
 import com.example.e_waste.databinding.ActivityAdminRegBinding;
+import com.example.e_waste.models.admin;
 import com.example.e_waste.user_rqstActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public class admin_regActivity extends AppCompatActivity  implements View.OnClickListener {
 ActivityAdminRegBinding binding;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseRef;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "admin_regActivity";
     @Override
@@ -34,7 +40,7 @@ ActivityAdminRegBinding binding;
         setContentView(R.layout.activity_admin_reg);
     binding=ActivityAdminRegBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("adminsList");
         mAuth = FirebaseAuth.getInstance();
         binding.loginTextView.setOnClickListener(this);
         binding.createUserButton.setOnClickListener(this);
@@ -45,6 +51,7 @@ ActivityAdminRegBinding binding;
         if (view == binding.loginTextView) {
             navigateTologinActivity("AdminLoginFragment");
         } else if (view == binding.createUserButton) {
+            uploadAdmin();
             createNewUser();
         }
     }
@@ -73,6 +80,26 @@ ActivityAdminRegBinding binding;
                 Toast.makeText(admin_regActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void uploadAdmin() {
+        admin admin = new admin(binding.nameEditText.getText().toString(), binding.emailEditText.getText().toString(), binding.passwordEditText.getText().toString(), binding.phoneEditText.getText().toString(), binding.adminPinEditText.getText().toString());
+        String uploadId = mDatabaseRef.push().getKey();
+        mDatabaseRef.child(uploadId).setValue(admin)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Data uploaded successfully
+                        Toast.makeText(admin_regActivity.this, "Successful admin upload", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Failed to upload data
+                        Toast.makeText(admin_regActivity.this, "Failed to upload admin: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
     private void createAuthStateListener() {
         mAuthListener = firebaseAuth -> {

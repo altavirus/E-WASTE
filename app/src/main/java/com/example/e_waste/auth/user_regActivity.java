@@ -16,18 +16,23 @@ import android.widget.Toast;
 import com.example.e_waste.R;
 import com.example.e_waste.databinding.ActivityMainBinding;
 import com.example.e_waste.databinding.ActivityUserRegBinding;
+import com.example.e_waste.models.User;
 import com.example.e_waste.user_rqstActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public class user_regActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "user_regActivity";
-
+    private DatabaseReference mDatabaseRef;
     private ActivityUserRegBinding binding;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -37,7 +42,7 @@ public class user_regActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = ActivityUserRegBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("usersList");
         mAuth = FirebaseAuth.getInstance();
         binding.loginTextView.setOnClickListener(this);
         binding.createUserButton.setOnClickListener(this);
@@ -49,6 +54,7 @@ public class user_regActivity extends AppCompatActivity implements View.OnClickL
         if (view == binding.loginTextView) {
             navigateTologinActivity("UserLoginFragment");
         } else if (view == binding.createUserButton) {
+            uploadUser();
             createNewUser();
         }
     }
@@ -59,7 +65,28 @@ public class user_regActivity extends AppCompatActivity implements View.OnClickL
         startActivity(intent);
         finish();
     }
+    private void uploadUser() {
+        User User=new User(binding.nameEditText.getText().toString(),binding.emailEditText.getText().toString(),binding.passwordEditText.getText().toString(),binding.phoneEditText.getText().toString());
+        String uploadId = mDatabaseRef.push().getKey();
+        mDatabaseRef.child(uploadId).setValue(User)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Data uploaded successfully
+                        Toast.makeText(user_regActivity.this, "Successful user upload", Toast.LENGTH_SHORT).show();
 
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Failed to upload data
+                        Toast.makeText(user_regActivity.this, "Failed to upload data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
     private void createNewUser() {
         if (!isFormValid()) {
             return;
@@ -112,8 +139,7 @@ public class user_regActivity extends AppCompatActivity implements View.OnClickL
         return isValidName(binding.nameEditText.getText().toString()) &&
                 isValidEmail(binding.emailEditText.getText().toString()) &&
                 isValidPassword(binding.passwordEditText.getText().toString(), binding.confirmPasswordEditText.getText().toString()) &&
-                isPhoneValid(binding.phoneEditText.getText().toString()) &&
-                isLocationValid();
+                isPhoneValid(binding.phoneEditText.getText().toString());
     }
     private void showProgressBar() {
 
@@ -162,15 +188,6 @@ public class user_regActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
-    private boolean isLocationValid() {
-        String location = binding.locationEditText.getText().toString().trim();
-
-        if (TextUtils.isEmpty(location)) {
-            binding.locationEditText.setError("Please enter location");
-            return false;
-        }
-        return true;
-    }
     private void createFirebaseUserProfile(final FirebaseUser user){
         UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
                 .setDisplayName(binding.nameEditText.getText().toString())
@@ -197,7 +214,6 @@ public class user_regActivity extends AppCompatActivity implements View.OnClickL
         intent.putExtra("userEmail", binding.emailEditText.getText().toString());
         intent.putExtra("userPswd", binding.passwordEditText.getText().toString());
         intent.putExtra("userPhone", binding.phoneEditText.getText().toString());
-        intent.putExtra("userLocation", binding.locationEditText.getText().toString());
         startActivity(intent);
         finish();
     }

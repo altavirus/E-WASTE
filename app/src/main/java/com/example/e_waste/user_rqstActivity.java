@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.e_waste.databinding.ActivityUserRqstBinding;
+import com.example.e_waste.models.User;
 import com.example.e_waste.models.request;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,15 +51,15 @@ ActivityUserRqstBinding binding;
         binding.button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    uploadFile();
+                    uploadUser();
             }
         });
     }
 
-    private void uploadFile() {
-        request request=new request(userName,userEmail,userPswd,userPhone,userLocation);
+    private void uploadUser() {
+        User User=new User(userName,userEmail,userPswd,userPhone);
         String uploadId = mDatabaseRef.push().getKey();
-        mDatabaseRef.child(uploadId).setValue(request)
+        mDatabaseRef.child(uploadId).setValue(User)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

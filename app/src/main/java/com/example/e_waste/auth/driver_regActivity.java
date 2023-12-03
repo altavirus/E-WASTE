@@ -14,17 +14,22 @@ import android.widget.Toast;
 import com.example.e_waste.R;
 import com.example.e_waste.databinding.ActivityDriverRegBinding;
 import com.example.e_waste.driver_rqstsActivity;
+import com.example.e_waste.models.User;
 import com.example.e_waste.user_rqstActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.Objects;
 
 public class driver_regActivity extends AppCompatActivity  implements View.OnClickListener {
 ActivityDriverRegBinding binding;
+    private DatabaseReference mDatabaseRef;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "driver_regActivity";
@@ -74,7 +79,28 @@ ActivityDriverRegBinding binding;
             }
         });
     }
+    private void uploadDriver() {
+        User User=new User(binding.adminSpinner.,binding.nameEditText.getText().toString(),binding.emailEditText.getText().toString(),binding.passwordEditText.getText().toString(),binding.phoneEditText.getText().toString());
+        String uploadId = mDatabaseRef.push().getKey();
+        mDatabaseRef.child(uploadId).setValue(User)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Data uploaded successfully
+                        Toast.makeText(driver_regActivity.this, "Successful user upload", Toast.LENGTH_SHORT).show();
 
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Failed to upload data
+                        Toast.makeText(driver_regActivity.this, "Failed to upload data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
     private void createAuthStateListener() {
         mAuthListener = firebaseAuth -> {
             final FirebaseUser user = firebaseAuth.getCurrentUser();

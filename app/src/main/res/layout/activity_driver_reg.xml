@@ -55,11 +55,10 @@
             <Spinner
                 android:id="@+id/admin_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_below="@id/adminlabel"
                 android:layout_margin="5dp"
                 android:spinnerMode="dropdown"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -75,7 +74,7 @@
             <EditText
                 android:id="@+id/pinEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginStart="5dp"
                 android:hint="123456"
                 android:inputType="textVisiblePassword"
@@ -95,7 +94,7 @@
             <EditText
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginStart="5dp"
                 android:hint="John Waki"
                 android:padding="10dp"
@@ -115,7 +114,7 @@
             <EditText
                 android:id="@+id/trkEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginStart="5dp"
                 android:hint="KDN 166T"
                 android:padding="10dp"
@@ -135,10 +134,10 @@
             <EditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginStart="5dp"
                 android:hint="driver@gmail.com"
-                android:inputType="number"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 android:textSize="14sp" />
@@ -155,11 +154,10 @@
             <EditText
                 android:id="@+id/passPEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginStart="5dp"
                 android:hint="123456"
                 android:padding="10dp"
-                android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 android:textSize="16sp" />
 
@@ -175,12 +173,11 @@
             <EditText
                 android:id="@+id/numberEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginStart="5dp"
                 android:hint="0712345678"
                 android:inputType="phone"
                 android:padding="10dp"
-                android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 android:textSize="16sp" />
 

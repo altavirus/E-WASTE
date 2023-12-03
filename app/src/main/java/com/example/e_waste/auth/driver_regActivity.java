@@ -79,7 +79,7 @@ ActivityDriverRegBinding binding;
             }
         });
     }
-    private void uploadDriver() {
+   /* private void uploadDriver() {
         User User=new User(binding.adminSpinner.,binding.nameEditText.getText().toString(),binding.emailEditText.getText().toString(),binding.passwordEditText.getText().toString(),binding.phoneEditText.getText().toString());
         String uploadId = mDatabaseRef.push().getKey();
         mDatabaseRef.child(uploadId).setValue(User)
@@ -100,7 +100,7 @@ ActivityDriverRegBinding binding;
 
                     }
                 });
-    }
+    }*/
     private void createAuthStateListener() {
         mAuthListener = firebaseAuth -> {
             final FirebaseUser user = firebaseAuth.getCurrentUser();
